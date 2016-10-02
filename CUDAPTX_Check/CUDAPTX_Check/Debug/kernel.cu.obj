@@ -12,7 +12,7 @@
 
 	// .weak	cudaMalloc
 .global .align 2 .b8 DeviceMem[20000];
-// _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost has been demoted
+// _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost has been demoted
 
 .weak .func  (.param .b32 func_retval0) cudaMalloc(
 	.param .b32 cudaMalloc_param_0,
@@ -250,296 +250,352 @@ tmp11:
 func_end5:
 }
 
+.func  (.param .b64 func_retval0) _ZN63_INTERNAL_41_tmpxft_00002fe8_00000000_8_kernel_cpp1_ii_4dd815f25__ldgEPKx(
+	.param .b32 _ZN63_INTERNAL_41_tmpxft_00002fe8_00000000_8_kernel_cpp1_ii_4dd815f25__ldgEPKx_param_0
+)
+{
+	.reg .b32 	%r<3>;
+	.reg .b64 	%rd<3>;
+
+
+	.loc 3 115 1
+func_begin6:
+	.loc	3 0 0
+
+	.loc 3 115 1
+
+	ld.param.u32 	%r1, [_ZN63_INTERNAL_41_tmpxft_00002fe8_00000000_8_kernel_cpp1_ii_4dd815f25__ldgEPKx_param_0];
+func_exec_begin6:
+
+//c:\program files\nvidia gpu computing toolkit\cuda\v8.0\include\sm_32_intrinsics.hpp:115 __SM_32_INTRINSICS_DECL__ long long __ldg(const long long *ptr) { unsigned long long ret; asm volatile ("ld.global.nc.s64 %0, [%1];"  : "=l"(ret) : __LDG_PTR (ptr)); return (long long)ret; }
+	.loc	3 115 1
+tmp12:
+	// inline asm
+	ld.global.nc.s64 %rd1, [%r1];
+	// inline asm
+tmp13:
+	mov.b64 	%rd2, %rd1;
+	st.param.b64	[func_retval0+0], %rd2;
+	ret;
+tmp14:
+func_end6:
+}
+
 	// .globl	_Z13LoadCheck_Remi
 .visible .entry _Z13LoadCheck_Remi(
 	.param .u32 _Z13LoadCheck_Remi_param_0
 )
 {
-	.local .align 4 .b8 	__local_depot6[4];
+	.local .align 4 .b8 	__local_depot7[8];
 	.reg .b32 	%SP;
 	.reg .b32 	%SPL;
 	.reg .pred 	%p<11>;
 	.reg .b16 	%rs<16>;
-	.reg .b32 	%r<45>;
-	.reg .b64 	%rd<27>;
+	.reg .b32 	%r<46>;
+	.reg .b64 	%rd<26>;
 	// demoted variable
-	.shared .align 2 .b8 _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost[8];
+	.shared .align 2 .b8 _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost[8];
 
 	.loc 1 13 1
-func_begin6:
+func_begin7:
 	.loc	1 0 0
 
 	.loc 1 13 1
 
-	mov.u32 	%r44, __local_depot6;
-	cvta.local.u32 	%SP, %r44;
+	mov.u32 	%r45, __local_depot7;
+	cvta.local.u32 	%SP, %r45;
 	ld.param.u32 	%r15, [_Z13LoadCheck_Remi_param_0];
 	st.u32 	[%SP+0], %r15;
-func_exec_begin6:
+tmp15:
+func_exec_begin7:
 
 //C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:14 	int x = threadIdx.x;
 	.loc	1 14 1
-tmp12:
-	mov.u32 	%r16, %tid.x;
-	mov.b32 	%r1, %r16;
-tmp13:
+	mov.u32 	%r17, %tid.x;
+	mov.b32 	%r1, %r17;
+tmp16:
 	mov.u64 	%rd5, 65535;
 
 //C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:16 	unsigned long long RefReg = 0x000000000000FFFF;
 	.loc	1 16 1
 	mov.b64 	%rd6, %rd5;
-tmp14:
+tmp17:
 
 //C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:17 	long long * lpDev = (long long  *)DeviceMem;
 	.loc	1 17 1
-	mov.u32 	%r17, DeviceMem;
-	cvta.global.u32 	%r18, %r17;
-	mov.u32 	%r2, %r18;
-tmp15:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:18 	LoadReg = lpDev[x];
-	.loc	1 18 1
-	shl.b32 	%r19, %r1, 3;
-	add.s32 	%r20, %r2, %r19;
-	ld.u64 	%rd7, [%r20];
-	mov.b64 	%rd26, %rd7;
-tmp16:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:20 	Cost[0] = (short)((LoadReg & RefReg)	  );
-	.loc	1 20 1
-	and.b64  	%rd8, %rd26, %rd6;
-	cvt.u16.u64	%rs1, %rd8;
-	mov.u32 	%r21, _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost;
-	cvta.shared.u32 	%r22, %r21;
-	st.u16 	[%r22], %rs1;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:21 	RefReg <<= 16;
-	.loc	1 21 1
-	shl.b64 	%rd9, %rd6, 16;
-tmp17:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:22  	Cost[1] = (short)((LoadReg &  RefReg)>>16);
-	.loc	1 22 1
-	and.b64  	%rd10, %rd26, %rd9;
-	shr.u64 	%rd11, %rd10, 16;
-	cvt.u16.u64	%rs2, %rd11;
-	st.u16 	[%r22+2], %rs2;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:23 	RefReg <<= 16;
-	.loc	1 23 1
-	shl.b64 	%rd12, %rd9, 16;
+	mov.u32 	%r18, DeviceMem;
+	cvta.global.u32 	%r19, %r18;
+	mov.u32 	%r2, %r19;
 tmp18:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:24 	Cost[2] = (short)((LoadReg & RefReg) >> 32);
-	.loc	1 24 1
-	and.b64  	%rd13, %rd26, %rd12;
-	shr.u64 	%rd14, %rd13, 32;
-	cvt.u16.u64	%rs3, %rd14;
-	st.u16 	[%r22+4], %rs3;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:18 	LoadReg = __ldg(&lpDev[x]);
+	.loc	1 18 1
+	shl.b32 	%r20, %r1, 3;
+	add.s32 	%r21, %r2, %r20;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:25 	RefReg <<= 16;
-	.loc	1 25 1
-	shl.b64 	%rd15, %rd12, 16;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:18 	LoadReg = __ldg(&lpDev[x]);
+	.loc	1 18 70
+	// Callseq Start 0
+	{
+	.reg .b32 temp_param_reg;
+	// <end>}
+	.param .b32 param0;
+	st.param.b32	[param0+0], %r21;
+	.param .b64 retval0;
+	call.uni (retval0), 
+	_ZN63_INTERNAL_41_tmpxft_00002fe8_00000000_8_kernel_cpp1_ii_4dd815f25__ldgEPKx, 
+	(
+	param0
+	);
+	ld.param.b64	%rd25, [retval0+0];
+	
+	//{
+	}// Callseq End 0
 tmp19:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:26 	Cost[3] = (short)((LoadReg & RefReg) >> 48);
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:20 	asm volatile (
+	.loc	1 20 1
+	// inline asm
+	mov.u32 %r16, %clock;
+	
+	// inline asm
+	st.u32 	[%SP+4], %r16;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:26 	Cost[0] = (short)((LoadReg & RefReg)	  );
 	.loc	1 26 1
-	and.b64  	%rd16, %rd26, %rd15;
-	shr.u64 	%rd17, %rd16, 48;
-	cvt.u16.u64	%rs4, %rd17;
-	st.u16 	[%r22+6], %rs4;
+	and.b64  	%rd7, %rd25, %rd6;
+	cvt.u16.u64	%rs1, %rd7;
+	mov.u32 	%r22, _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost;
+	cvta.shared.u32 	%r23, %r22;
+	st.u16 	[%r23], %rs1;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:27 	int minCost = Cost[0];
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:27 	RefReg <<= 16;
 	.loc	1 27 1
-	ld.u16 	%rs5, [%r22];
-	cvt.s32.s16	%r38, %rs5;
+	shl.b64 	%rd8, %rd6, 16;
 tmp20:
-	mov.u32 	%r23, 1;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:29 	int RefFwdData = 1;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:28  	Cost[1] = (short)((LoadReg &  RefReg)>>16);
+	.loc	1 28 1
+	and.b64  	%rd9, %rd25, %rd8;
+	shr.u64 	%rd10, %rd9, 16;
+	cvt.u16.u64	%rs2, %rd10;
+	st.u16 	[%r23+2], %rs2;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:29 	RefReg <<= 16;
 	.loc	1 29 1
-	mov.b32 	%r41, %r23;
+	shl.b64 	%rd11, %rd8, 16;
 tmp21:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:30 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:30 	Cost[2] = (short)((LoadReg & RefReg) >> 32);
 	.loc	1 30 1
-	mov.b32 	%r43, %r23;
+	and.b64  	%rd12, %rd25, %rd11;
+	shr.u64 	%rd13, %rd12, 32;
+	cvt.u16.u64	%rs3, %rd13;
+	st.u16 	[%r23+4], %rs3;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:31 	RefReg <<= 16;
+	.loc	1 31 1
+	shl.b64 	%rd14, %rd11, 16;
 tmp22:
 
-BB6_1:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:30 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
-	.loc	1 30 1
-	mov.u32 	%r7, %r41;
-tmp23:
-	setp.lt.s32	%p1, %r43, 1000;
-tmp24:
-	not.pred 	%p2, %p1;
-tmp25:
-	@%p2 bra 	BB6_12;
-	bra.uni 	BB6_2;
-
-BB6_2:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:31 		int Ref = nLoop % 4;
-	.loc	1 31 1
-tmp26:
-	rem.s32 	%r9, %r43, 4;
-tmp27:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:32 		if (Ref == 1) {
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:32 	Cost[3] = (short)((LoadReg & RefReg) >> 48);
 	.loc	1 32 1
+	and.b64  	%rd15, %rd25, %rd14;
+	shr.u64 	%rd16, %rd15, 48;
+	cvt.u16.u64	%rs4, %rd16;
+	st.u16 	[%r23+6], %rs4;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:33 	int minCost = Cost[0];
+	.loc	1 33 1
+	ld.u16 	%rs5, [%r23];
+	cvt.s32.s16	%r39, %rs5;
+tmp23:
+	mov.u32 	%r24, 1;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:35 	int RefFwdData = 1;
+	.loc	1 35 1
+	mov.b32 	%r42, %r24;
+tmp24:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:36 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 36 1
+	mov.b32 	%r44, %r24;
+tmp25:
+
+BB7_1:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:36 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 36 1
+	mov.u32 	%r7, %r42;
+tmp26:
+	setp.lt.s32	%p1, %r44, 1000;
+tmp27:
+	not.pred 	%p2, %p1;
+tmp28:
+	@%p2 bra 	BB7_12;
+	bra.uni 	BB7_2;
+
+BB7_2:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:37 		int Ref = nLoop % 4;
+	.loc	1 37 1
+tmp29:
+	rem.s32 	%r9, %r44, 4;
+tmp30:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:38 		if (Ref == 1) {
+	.loc	1 38 1
 	setp.eq.s32	%p3, %r9, 1;
 	not.pred 	%p4, %p3;
-	mov.u32 	%r42, %r7;
-	@%p4 bra 	BB6_4;
-	bra.uni 	BB6_3;
+	mov.u32 	%r43, %r7;
+	@%p4 bra 	BB7_4;
+	bra.uni 	BB7_3;
 
-BB6_3:
+BB7_3:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:33 			LoadReg = lpDev[x + RefFwdData++];
-	.loc	1 33 1
-tmp28:
-	add.s32 	%r10, %r7, 1;
-tmp29:
-	add.s32 	%r24, %r1, %r7;
-	shl.b32 	%r25, %r24, 3;
-	add.s32 	%r26, %r2, %r25;
-	ld.u64 	%rd18, [%r26];
-	mov.b64 	%rd26, %rd18;
-tmp30:
-	mov.u32 	%r42, %r10;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:39 			LoadReg = lpDev[x + RefFwdData++];
+	.loc	1 39 1
 tmp31:
-
-BB6_4:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:35 		if (Cost[0] < minCost) {
-	.loc	1 35 1
-	mov.u32 	%r41, %r42;
+	add.s32 	%r10, %r7, 1;
 tmp32:
-	mov.u32 	%r27, _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost;
-	cvta.shared.u32 	%r28, %r27;
-	ld.u16 	%rs6, [%r28];
-	cvt.s32.s16	%r29, %rs6;
-	setp.lt.s32	%p5, %r29, %r38;
-	not.pred 	%p6, %p5;
-	@%p6 bra 	BB6_6;
-	bra.uni 	BB6_5;
-
-BB6_5:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:36 			minCost = Cost[0];
-	.loc	1 36 1
+	add.s32 	%r25, %r1, %r7;
+	shl.b32 	%r26, %r25, 3;
+	add.s32 	%r27, %r2, %r26;
+	ld.u64 	%rd17, [%r27];
+	mov.b64 	%rd25, %rd17;
 tmp33:
-	mov.u32 	%r30, _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost;
-	cvta.shared.u32 	%r31, %r30;
-	ld.u16 	%rs7, [%r31];
-	cvt.s32.s16	%r38, %rs7;
+	mov.u32 	%r43, %r10;
 tmp34:
 
-BB6_6:
+BB7_4:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:38 		if (x + 1 + nLoop >= 10000) {
-	.loc	1 38 1
-	add.s32 	%r32, %r1, 1;
-	add.s32 	%r33, %r32, %r43;
-	setp.ge.s32	%p7, %r33, 10000;
-	not.pred 	%p8, %p7;
-	@%p8 bra 	BB6_8;
-	bra.uni 	BB6_7;
-
-BB6_7:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:39 			break;
-	.loc	1 39 1
-tmp35:
-	bra.uni 	BB6_13;
-tmp36:
-
-BB6_8:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:41 		Cost[0] = Cost[1];
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:41 		if (Cost[0] < minCost) {
 	.loc	1 41 1
-	mov.u32 	%r34, _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost;
-	cvta.shared.u32 	%r35, %r34;
-	ld.u16 	%rs8, [%r35+2];
-	st.u16 	[%r35], %rs8;
+	mov.u32 	%r42, %r43;
+tmp35:
+	mov.u32 	%r28, _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost;
+	cvta.shared.u32 	%r29, %r28;
+	ld.u16 	%rs6, [%r29];
+	cvt.s32.s16	%r30, %rs6;
+	setp.lt.s32	%p5, %r30, %r39;
+	not.pred 	%p6, %p5;
+	@%p6 bra 	BB7_6;
+	bra.uni 	BB7_5;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:42 		Cost[1] = Cost[2];
+BB7_5:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:42 			minCost = Cost[0];
 	.loc	1 42 1
-	ld.u16 	%rs9, [%r35+4];
-	st.u16 	[%r35+2], %rs9;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:43 		Cost[2] = Cost[3];
-	.loc	1 43 1
-	ld.u16 	%rs10, [%r35+6];
-	st.u16 	[%r35+4], %rs10;
-	mov.u16 	%rs11, 0;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:44 		Cost[3] = 0;
-	.loc	1 44 1
-	st.u16 	[%r35+6], %rs11;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:45 		if (Ref == 0) {
-	.loc	1 45 1
+tmp36:
+	mov.u32 	%r31, _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost;
+	cvta.shared.u32 	%r32, %r31;
+	ld.u16 	%rs7, [%r32];
+	cvt.s32.s16	%r39, %rs7;
 tmp37:
-	setp.eq.s32	%p9, %r9, 0;
-	not.pred 	%p10, %p9;
-	@%p10 bra 	BB6_10;
-	bra.uni 	BB6_9;
 
-BB6_9:
+BB7_6:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:47 			Cost[0] = (short)((LoadReg & 0x000000000000FFFF)		);
-	.loc	1 47 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:44 		if (x + 1 + nLoop >= 10000) {
+	.loc	1 44 1
+	add.s32 	%r33, %r1, 1;
+	add.s32 	%r34, %r33, %r44;
+	setp.ge.s32	%p7, %r34, 10000;
+	not.pred 	%p8, %p7;
+	@%p8 bra 	BB7_8;
+	bra.uni 	BB7_7;
+
+BB7_7:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:45 			break;
+	.loc	1 45 1
 tmp38:
-	and.b64  	%rd19, %rd26, 65535;
-	cvt.u16.u64	%rs12, %rd19;
-	mov.u32 	%r36, _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost;
-	cvta.shared.u32 	%r37, %r36;
-	st.u16 	[%r37], %rs12;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:48 			Cost[1] = (short)((LoadReg & 0x00000000FFFF0000) >> 16	);
-	.loc	1 48 1
-	and.b64  	%rd20, %rd26, 4294901760;
-	shr.u64 	%rd21, %rd20, 16;
-	cvt.u16.u64	%rs13, %rd21;
-	st.u16 	[%r37+2], %rs13;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:49 			Cost[2] = (short)((LoadReg & 0x0000FFFF00000000) >> 32	);
-	.loc	1 49 1
-	and.b64  	%rd22, %rd26, 281470681743360;
-	shr.u64 	%rd23, %rd22, 32;
-	cvt.u16.u64	%rs14, %rd23;
-	st.u16 	[%r37+4], %rs14;
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:50 			Cost[3] = (short)((LoadReg & 0xFFFF000000000000) >> 48	);
-	.loc	1 50 1
-	and.b64  	%rd24, %rd26, -281474976710656;
-	shr.u64 	%rd25, %rd24, 48;
-	cvt.u16.u64	%rs15, %rd25;
-	st.u16 	[%r37+6], %rs15;
+	bra.uni 	BB7_13;
 tmp39:
 
-BB6_10:
+BB7_8:
 
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:47 		Cost[0] = Cost[1];
+	.loc	1 47 1
+	mov.u32 	%r35, _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost;
+	cvta.shared.u32 	%r36, %r35;
+	ld.u16 	%rs8, [%r36+2];
+	st.u16 	[%r36], %rs8;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:30 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
-	.loc	1 30 24
-	add.s32 	%r43, %r43, 1;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:48 		Cost[1] = Cost[2];
+	.loc	1 48 1
+	ld.u16 	%rs9, [%r36+4];
+	st.u16 	[%r36+2], %rs9;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:49 		Cost[2] = Cost[3];
+	.loc	1 49 1
+	ld.u16 	%rs10, [%r36+6];
+	st.u16 	[%r36+4], %rs10;
+	mov.u16 	%rs11, 0;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:50 		Cost[3] = 0;
+	.loc	1 50 1
+	st.u16 	[%r36+6], %rs11;
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:51 		if (Ref == 0) {
+	.loc	1 51 1
 tmp40:
-	bra.uni 	BB6_1;
+	setp.eq.s32	%p9, %r9, 0;
+	not.pred 	%p10, %p9;
+	@%p10 bra 	BB7_10;
+	bra.uni 	BB7_9;
+
+BB7_9:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:53 			Cost[0] = (short)((LoadReg & 0x000000000000FFFF)		);
+	.loc	1 53 1
 tmp41:
+	and.b64  	%rd18, %rd25, 65535;
+	cvt.u16.u64	%rs12, %rd18;
+	mov.u32 	%r37, _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost;
+	cvta.shared.u32 	%r38, %r37;
+	st.u16 	[%r38], %rs12;
 
-BB6_12:
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:54 			Cost[1] = (short)((LoadReg & 0x00000000FFFF0000) >> 16	);
+	.loc	1 54 1
+	and.b64  	%rd19, %rd25, 4294901760;
+	shr.u64 	%rd20, %rd19, 16;
+	cvt.u16.u64	%rs13, %rd20;
+	st.u16 	[%r38+2], %rs13;
 
-BB6_13:
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:55 			Cost[2] = (short)((LoadReg & 0x0000FFFF00000000) >> 32	);
+	.loc	1 55 1
+	and.b64  	%rd21, %rd25, 281470681743360;
+	shr.u64 	%rd22, %rd21, 32;
+	cvt.u16.u64	%rs14, %rd22;
+	st.u16 	[%r38+4], %rs14;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:53 }
-	.loc	1 53 2
-	ret;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:56 			Cost[3] = (short)((LoadReg & 0xFFFF000000000000) >> 48	);
+	.loc	1 56 1
+	and.b64  	%rd23, %rd25, -281474976710656;
+	shr.u64 	%rd24, %rd23, 48;
+	cvt.u16.u64	%rs15, %rd24;
+	st.u16 	[%r38+6], %rs15;
 tmp42:
-func_end6:
+
+BB7_10:
+
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:36 	for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 36 24
+	add.s32 	%r44, %r44, 1;
+tmp43:
+	bra.uni 	BB7_1;
+tmp44:
+
+BB7_12:
+
+BB7_13:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:59 }
+	.loc	1 59 2
+	ret;
+tmp45:
+func_end7:
 }
 
 	// .globl	_Z9LoadChecki
@@ -547,7 +603,7 @@ func_end6:
 	.param .u32 _Z9LoadChecki_param_0
 )
 {
-	.local .align 4 .b8 	__local_depot7[4];
+	.local .align 4 .b8 	__local_depot8[4];
 	.reg .b32 	%SP;
 	.reg .b32 	%SPL;
 	.reg .pred 	%p<7>;
@@ -555,71 +611,71 @@ func_end6:
 	.reg .b32 	%r<26>;
 
 
-	.loc 1 54 1
-func_begin7:
+	.loc 1 60 1
+func_begin8:
 	.loc	1 0 0
 
-	.loc 1 54 1
+	.loc 1 60 1
 
-	mov.u32 	%r25, __local_depot7;
+	mov.u32 	%r25, __local_depot8;
 	cvta.local.u32 	%SP, %r25;
 	ld.param.u32 	%r9, [_Z9LoadChecki_param_0];
 	st.u32 	[%SP+0], %r9;
-func_exec_begin7:
+func_exec_begin8:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:55 	int x = threadIdx.x;
-	.loc	1 55 1
-tmp43:
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:61 	int x = threadIdx.x;
+	.loc	1 61 1
+tmp46:
 	mov.u32 	%r10, %tid.x;
 	mov.b32 	%r1, %r10;
-tmp44:
+tmp47:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:56 	short Cost = DeviceMem[x];
-	.loc	1 56 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:62 	short Cost = DeviceMem[x];
+	.loc	1 62 1
 	mov.u32 	%r11, DeviceMem;
 	cvta.global.u32 	%r12, %r11;
 	shl.b32 	%r13, %r1, 1;
 	add.s32 	%r14, %r12, %r13;
 	ld.u16 	%rs2, [%r14];
 	mov.b16 	%rs3, %rs2;
-tmp45:
+tmp48:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:57 	int minCost = Cost;
-	.loc	1 57 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:63 	int minCost = Cost;
+	.loc	1 63 1
 	cvt.s32.s16	%r23, %rs3;
-tmp46:
+tmp49:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:60 	if (x + 1  < 10000) {
-	.loc	1 60 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:66 	if (x + 1  < 10000) {
+	.loc	1 66 1
 	add.s32 	%r15, %r1, 1;
 	setp.lt.s32	%p1, %r15, 10000;
 	not.pred 	%p2, %p1;
-	@%p2 bra 	BB7_8;
-	bra.uni 	BB7_1;
+	@%p2 bra 	BB8_8;
+	bra.uni 	BB8_1;
 
-BB7_1:
+BB8_1:
 	mov.u32 	%r16, 1;
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:61 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
-	.loc	1 61 1
-tmp47:
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:67 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 67 1
+tmp50:
 	mov.b32 	%r24, %r16;
-tmp48:
+tmp51:
 
-BB7_2:
+BB8_2:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:61 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
-	.loc	1 61 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:67 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 67 1
 	setp.lt.s32	%p3, %r24, 1000;
 	not.pred 	%p4, %p3;
-	@%p4 bra 	BB7_7;
-	bra.uni 	BB7_3;
+	@%p4 bra 	BB8_7;
+	bra.uni 	BB8_3;
 
-BB7_3:
+BB8_3:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:62 			Cost = DeviceMem[x+nLoop];
-	.loc	1 62 1
-tmp49:
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:68 			Cost = DeviceMem[x+nLoop];
+	.loc	1 68 1
+tmp52:
 	add.s32 	%r17, %r1, %r24;
 	shl.b32 	%r18, %r17, 1;
 	mov.u32 	%r19, DeviceMem;
@@ -627,51 +683,52 @@ tmp49:
 	add.s32 	%r21, %r20, %r18;
 	ld.u16 	%rs4, [%r21];
 	mov.b16 	%rs1, %rs4;
-tmp50:
+tmp53:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:63 			if (Cost < minCost) {
-	.loc	1 63 1
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:69 			if (Cost < minCost) {
+	.loc	1 69 1
 	cvt.s32.s16	%r22, %rs1;
 	setp.lt.s32	%p5, %r22, %r23;
 	not.pred 	%p6, %p5;
-	@%p6 bra 	BB7_5;
-	bra.uni 	BB7_4;
+	@%p6 bra 	BB8_5;
+	bra.uni 	BB8_4;
 
-BB7_4:
+BB8_4:
 
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:64 				minCost = Cost;
-	.loc	1 64 1
-tmp51:
-	cvt.s32.s16	%r23, %rs1;
-tmp52:
-
-BB7_5:
-
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:61 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
-	.loc	1 61 24
-	add.s32 	%r24, %r24, 1;
-tmp53:
-	bra.uni 	BB7_2;
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:70 				minCost = Cost;
+	.loc	1 70 1
 tmp54:
-
-BB7_7:
-
-BB7_8:
-
-//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:68 }
-	.loc	1 68 2
-	ret;
+	cvt.s32.s16	%r23, %rs1;
 tmp55:
-func_end7:
+
+BB8_5:
+
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:67 		for (int nLoop = 1; nLoop < 1000; nLoop++) {
+	.loc	1 67 24
+	add.s32 	%r24, %r24, 1;
+tmp56:
+	bra.uni 	BB8_2;
+tmp57:
+
+BB8_7:
+
+BB8_8:
+
+//C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu:74 }
+	.loc	1 74 2
+	ret;
+tmp58:
+func_end8:
 }
 
-	.file	1 "C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu", 1475423828, 1809
+	.file	1 "C:/Users/ask/Documents/GitHub/CUDAPTXTest/CUDAPTX_Check/CUDAPTX_Check/kernel.cu", 1475426256, 1900
 	.file	2 "c:\\program files\\nvidia gpu computing toolkit\\cuda\\v8.0\\include\\cuda_device_runtime_api.h", 1473087000, 14086
-	.file	3 "c:\\program files\\nvidia gpu computing toolkit\\cuda\\v8.0\\include\\driver_types.h", 1473086998, 71803
+	.file	3 "c:\\program files\\nvidia gpu computing toolkit\\cuda\\v8.0\\include\\sm_32_intrinsics.hpp", 1473086999, 33451
+	.file	4 "c:\\program files\\nvidia gpu computing toolkit\\cuda\\v8.0\\include\\driver_types.h", 1473086998, 71803
 
 .section .debug_info {
- .b32 7663
+ .b32 7963
  .b8 2
  .b8 0
  .b32 .debug_abbrev
@@ -962,7 +1019,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 64
- .b32 7574
+ .b32 7879
  .b8 7
  .b8 3
  .b32 __local_depot0
@@ -977,7 +1034,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 64
- .b32 7511
+ .b32 7816
  .b8 7
  .b8 3
  .b32 __local_depot0
@@ -3744,7 +3801,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 69
- .b32 7586
+ .b32 7891
  .b8 7
  .b8 3
  .b32 __local_depot1
@@ -3759,7 +3816,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 69
- .b32 7592
+ .b32 7897
  .b8 7
  .b8 3
  .b32 __local_depot1
@@ -3837,7 +3894,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 74
- .b32 7603
+ .b32 7908
  .b8 7
  .b8 3
  .b32 __local_depot2
@@ -3855,7 +3912,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 74
- .b32 4436
+ .b32 4741
  .b8 7
  .b8 3
  .b32 __local_depot2
@@ -3875,7 +3932,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 74
- .b32 7609
+ .b32 7914
  .b8 7
  .b8 3
  .b32 __local_depot2
@@ -3936,7 +3993,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 79
- .b32 7603
+ .b32 7908
  .b8 7
  .b8 3
  .b32 __local_depot3
@@ -4064,7 +4121,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 84
- .b32 7603
+ .b32 7908
  .b8 7
  .b8 3
  .b32 __local_depot4
@@ -4082,7 +4139,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 84
- .b32 7592
+ .b32 7897
  .b8 7
  .b8 3
  .b32 __local_depot4
@@ -4105,7 +4162,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 84
- .b32 7609
+ .b32 7914
  .b8 7
  .b8 3
  .b32 __local_depot4
@@ -4134,7 +4191,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 84
- .b32 7511
+ .b32 7816
  .b8 7
  .b8 3
  .b32 __local_depot4
@@ -4280,7 +4337,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 89
- .b32 7603
+ .b32 7908
  .b8 7
  .b8 3
  .b32 __local_depot5
@@ -4298,7 +4355,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 89
- .b32 7592
+ .b32 7897
  .b8 7
  .b8 3
  .b32 __local_depot5
@@ -4321,7 +4378,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 89
- .b32 7609
+ .b32 7914
  .b8 7
  .b8 3
  .b32 __local_depot5
@@ -4350,7 +4407,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 89
- .b32 7511
+ .b32 7816
  .b8 7
  .b8 3
  .b32 __local_depot5
@@ -4369,7 +4426,7 @@ func_end7:
  .b8 0
  .b32 2
  .b32 89
- .b32 7523
+ .b32 7828
  .b8 7
  .b8 3
  .b32 __local_depot5
@@ -4378,6 +4435,241 @@ func_end7:
 
  .b8 6
  .b8 0
+ .b8 12
+
+ .b8 95
+ .b8 90
+ .b8 78
+ .b8 54
+ .b8 51
+ .b8 95
+ .b8 73
+ .b8 78
+ .b8 84
+ .b8 69
+ .b8 82
+ .b8 78
+ .b8 65
+ .b8 76
+ .b8 95
+ .b8 52
+ .b8 49
+ .b8 95
+ .b8 116
+ .b8 109
+ .b8 112
+ .b8 120
+ .b8 102
+ .b8 116
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 50
+ .b8 102
+ .b8 101
+ .b8 56
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 95
+ .b8 56
+ .b8 95
+ .b8 107
+ .b8 101
+ .b8 114
+ .b8 110
+ .b8 101
+ .b8 108
+ .b8 95
+ .b8 99
+ .b8 112
+ .b8 112
+ .b8 49
+ .b8 95
+ .b8 105
+ .b8 105
+ .b8 95
+ .b8 52
+ .b8 100
+ .b8 100
+ .b8 56
+ .b8 49
+ .b8 53
+ .b8 102
+ .b8 50
+ .b8 53
+ .b8 95
+ .b8 95
+ .b8 108
+ .b8 100
+ .b8 103
+ .b8 69
+ .b8 80
+ .b8 75
+ .b8 120
+
+ .b8 0
+ .b8 95
+ .b8 90
+ .b8 78
+ .b8 54
+ .b8 51
+ .b8 95
+ .b8 73
+ .b8 78
+ .b8 84
+ .b8 69
+ .b8 82
+ .b8 78
+ .b8 65
+ .b8 76
+ .b8 95
+ .b8 52
+ .b8 49
+ .b8 95
+ .b8 116
+ .b8 109
+ .b8 112
+ .b8 120
+ .b8 102
+ .b8 116
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 50
+ .b8 102
+ .b8 101
+ .b8 56
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 95
+ .b8 56
+ .b8 95
+ .b8 107
+ .b8 101
+ .b8 114
+ .b8 110
+ .b8 101
+ .b8 108
+ .b8 95
+ .b8 99
+ .b8 112
+ .b8 112
+ .b8 49
+ .b8 95
+ .b8 105
+ .b8 105
+ .b8 95
+ .b8 52
+ .b8 100
+ .b8 100
+ .b8 56
+ .b8 49
+ .b8 53
+ .b8 102
+ .b8 50
+ .b8 53
+ .b8 95
+ .b8 95
+ .b8 108
+ .b8 100
+ .b8 103
+ .b8 69
+ .b8 80
+ .b8 75
+ .b8 120
+
+ .b8 0
+ .b32 3
+ .b32 115
+ .b32 3983
+ .b32 func_begin6
+ .b32 func_end6
+ .b8 1
+ .b8 156
+ .b8 8
+
+ .b8 112
+ .b8 116
+ .b8 114
+
+ .b8 0
+ .b32 3
+ .b32 115
+ .b32 7924
+ .b8 5
+ .b8 144
+ .b8 177
+ .b8 228
+ .b8 149
+ .b8 1
+ .b8 2
+ .b8 13
+
+ .b32 tmp12
+ .b32 tmp14
+ .b8 13
+
+ .b32 tmp12
+ .b32 tmp14
+ .b8 13
+
+ .b32 tmp12
+ .b32 tmp14
+ .b8 14
+
+ .b8 114
+ .b8 101
+ .b8 116
+
+ .b8 0
+ .b32 3
+ .b32 115
+ .b32 7935
+ .b8 6
+ .b8 144
+ .b8 177
+ .b8 200
+ .b8 201
+ .b8 171
+ .b8 2
+ .b8 2
+ .b8 0
+ .b8 0
+ .b8 0
+ .b8 0
+ .b8 5
+
+ .b8 108
+ .b8 111
+ .b8 110
+ .b8 103
+ .b8 32
+ .b8 108
+ .b8 111
+ .b8 110
+ .b8 103
+
+ .b8 0
+ .b8 5
+ .b32 8
  .b8 7
 
  .b8 95
@@ -4422,10 +4714,10 @@ func_end7:
  .b8 0
  .b32 1
  .b32 13
- .b32 4174
+ .b32 4479
  .b8 1
- .b32 func_begin6
- .b32 func_end6
+ .b32 func_begin7
+ .b32 func_end7
  .b8 1
  .b8 156
  .b8 8
@@ -4437,34 +4729,53 @@ func_end7:
  .b8 0
  .b32 1
  .b32 13
- .b32 7609
+ .b32 7914
  .b8 7
  .b8 3
- .b32 __local_depot6
+ .b32 __local_depot7
  .b8 35
  .b8 0
 
  .b8 6
- .b8 12
-
- .b32 tmp12
- .b32 tmp42
- .b8 12
-
- .b32 tmp12
- .b32 tmp41
- .b8 12
-
- .b32 tmp12
- .b32 tmp41
  .b8 13
+
+ .b32 tmp15
+ .b32 tmp45
+ .b8 13
+
+ .b32 tmp15
+ .b32 tmp44
+ .b8 13
+
+ .b32 tmp15
+ .b32 tmp44
+ .b8 14
+
+ .b8 67
+ .b8 108
+ .b8 111
+ .b8 99
+ .b8 107
+
+ .b8 0
+ .b32 1
+ .b32 19
+ .b32 7914
+ .b8 7
+ .b8 3
+ .b32 __local_depot7
+ .b8 35
+ .b8 4
+
+ .b8 6
+ .b8 14
 
  .b8 120
 
  .b8 0
  .b32 1
  .b32 14
- .b32 7609
+ .b32 7914
  .b8 5
  .b8 144
  .b8 177
@@ -4472,7 +4783,7 @@ func_end7:
  .b8 149
  .b8 1
  .b8 2
- .b8 14
+ .b8 15
 
  .b8 82
  .b8 101
@@ -4484,9 +4795,9 @@ func_end7:
  .b8 0
  .b32 1
  .b32 16
- .b32 7619
+ .b32 7935
  .b32 .debug_loc
- .b8 13
+ .b8 14
 
  .b8 108
  .b8 112
@@ -4497,7 +4808,7 @@ func_end7:
  .b8 0
  .b32 1
  .b32 17
- .b32 7644
+ .b32 7960
  .b8 5
  .b8 144
  .b8 178
@@ -4505,7 +4816,7 @@ func_end7:
  .b8 149
  .b8 1
  .b8 2
- .b8 14
+ .b8 15
 
  .b8 76
  .b8 111
@@ -4518,9 +4829,9 @@ func_end7:
  .b8 0
  .b32 1
  .b32 15
- .b32 7619
+ .b32 7935
  .b32 .debug_loc+74
- .b8 14
+ .b8 15
 
  .b8 109
  .b8 105
@@ -4532,10 +4843,10 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 27
- .b32 7609
+ .b32 33
+ .b32 7914
  .b32 .debug_loc+150
- .b8 14
+ .b8 15
 
  .b8 82
  .b8 101
@@ -4550,8 +4861,8 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 29
- .b32 7609
+ .b32 35
+ .b32 7914
  .b32 .debug_loc+222
  .b8 2
 
@@ -4563,10 +4874,10 @@ func_end7:
  .b8 0
  .b32 263
  .b32 1
- .b32 19
+ .b32 25
  .b8 5
  .b8 3
- .b32 _Z13LoadCheck_Remi$__cuda_local_var_188831_31_non_const_Cost
+ .b32 _Z13LoadCheck_Remi$__cuda_local_var_188837_31_non_const_Cost
  .b8 95
  .b8 90
  .b8 49
@@ -4608,7 +4919,7 @@ func_end7:
  .b8 56
  .b8 56
  .b8 51
- .b8 49
+ .b8 55
  .b8 95
  .b8 51
  .b8 49
@@ -4630,11 +4941,11 @@ func_end7:
 
  .b8 0
  .b8 8
- .b8 12
+ .b8 13
 
- .b32 tmp21
- .b32 tmp41
- .b8 14
+ .b32 tmp24
+ .b32 tmp44
+ .b8 15
 
  .b8 110
  .b8 76
@@ -4644,26 +4955,26 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 30
- .b32 7609
+ .b32 36
+ .b32 7914
  .b32 .debug_loc+293
- .b8 12
-
- .b32 tmp22
- .b32 tmp41
- .b8 12
-
- .b32 tmp22
- .b32 tmp41
- .b8 12
-
- .b32 tmp26
- .b32 tmp41
- .b8 12
-
- .b32 tmp26
- .b32 tmp39
  .b8 13
+
+ .b32 tmp25
+ .b32 tmp44
+ .b8 13
+
+ .b32 tmp25
+ .b32 tmp44
+ .b8 13
+
+ .b32 tmp29
+ .b32 tmp44
+ .b8 13
+
+ .b32 tmp29
+ .b32 tmp42
+ .b8 14
 
  .b8 82
  .b8 101
@@ -4671,8 +4982,8 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 31
- .b32 7609
+ .b32 37
+ .b32 7914
  .b8 5
  .b8 144
  .b8 185
@@ -4689,7 +5000,7 @@ func_end7:
  .b8 0
  .b8 0
  .b8 0
- .b8 15
+ .b8 16
 
  .b8 118
  .b8 111
@@ -4730,11 +5041,11 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 54
- .b32 4174
+ .b32 60
+ .b32 4479
  .b8 1
- .b32 func_begin7
- .b32 func_end7
+ .b32 func_begin8
+ .b32 func_end8
  .b8 1
  .b8 156
  .b8 8
@@ -4745,35 +5056,35 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 54
- .b32 7609
+ .b32 60
+ .b32 7914
  .b8 7
  .b8 3
- .b32 __local_depot7
+ .b32 __local_depot8
  .b8 35
  .b8 0
 
  .b8 6
- .b8 12
-
- .b32 tmp43
- .b32 tmp55
- .b8 12
-
- .b32 tmp43
- .b32 tmp54
- .b8 12
-
- .b32 tmp43
- .b32 tmp54
  .b8 13
+
+ .b32 tmp46
+ .b32 tmp58
+ .b8 13
+
+ .b32 tmp46
+ .b32 tmp57
+ .b8 13
+
+ .b32 tmp46
+ .b32 tmp57
+ .b8 14
 
  .b8 120
 
  .b8 0
  .b32 1
- .b32 55
- .b32 7609
+ .b32 61
+ .b32 7914
  .b8 5
  .b8 144
  .b8 177
@@ -4781,7 +5092,7 @@ func_end7:
  .b8 149
  .b8 1
  .b8 2
- .b8 14
+ .b8 15
 
  .b8 67
  .b8 111
@@ -4790,10 +5101,10 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 56
+ .b32 62
  .b32 241
  .b32 .debug_loc+349
- .b8 14
+ .b8 15
 
  .b8 109
  .b8 105
@@ -4805,10 +5116,10 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 57
- .b32 7609
+ .b32 63
+ .b32 7914
  .b32 .debug_loc+389
- .b8 16
+ .b8 17
 
  .b8 82
  .b8 101
@@ -4823,23 +5134,23 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 59
- .b32 7609
+ .b32 65
+ .b32 7914
  .b8 1
 
- .b8 12
+ .b8 13
 
- .b32 tmp46
- .b32 tmp54
- .b8 12
+ .b32 tmp49
+ .b32 tmp57
+ .b8 13
 
- .b32 tmp47
- .b32 tmp54
- .b8 12
+ .b32 tmp50
+ .b32 tmp57
+ .b8 13
 
- .b32 tmp47
- .b32 tmp54
- .b8 14
+ .b32 tmp50
+ .b32 tmp57
+ .b8 15
 
  .b8 110
  .b8 76
@@ -4849,8 +5160,8 @@ func_end7:
 
  .b8 0
  .b32 1
- .b32 61
- .b32 7609
+ .b32 67
+ .b32 7914
  .b32 .debug_loc+461
  .b8 0
  .b8 0
@@ -8199,7 +8510,7 @@ func_end7:
  .b8 0
  .b8 9
 
- .b32 7523
+ .b32 7828
  .b8 115
  .b8 105
  .b8 122
@@ -8226,7 +8537,7 @@ func_end7:
  .b8 0
  .b8 7
  .b32 4
- .b8 17
+ .b8 18
 
  .b8 99
  .b8 117
@@ -8249,30 +8560,30 @@ func_end7:
 
  .b8 0
  .b32 0
- .b32 3
+ .b32 4
  .b32 1067
- .b8 18
+ .b8 19
 
- .b32 7580
- .b8 12
- .b8 18
-
- .b32 4174
- .b8 12
- .b8 18
-
- .b32 7542
- .b8 12
- .b8 18
-
- .b32 7598
+ .b32 7885
  .b8 12
  .b8 19
 
- .b32 4174
- .b8 18
+ .b32 4479
+ .b8 12
+ .b8 19
 
- .b32 7609
+ .b32 7847
+ .b8 12
+ .b8 19
+
+ .b32 7903
+ .b8 12
+ .b8 20
+
+ .b32 4479
+ .b8 19
+
+ .b32 7914
  .b8 12
  .b8 5
 
@@ -8283,6 +8594,13 @@ func_end7:
  .b8 0
  .b8 5
  .b32 4
+ .b8 19
+
+ .b32 7930
+ .b8 12
+ .b8 20
+
+ .b32 3983
  .b8 5
 
  .b8 117
@@ -8307,25 +8625,10 @@ func_end7:
  .b8 0
  .b8 7
  .b32 8
- .b8 18
+ .b8 19
 
- .b32 7650
+ .b32 3983
  .b8 12
- .b8 5
-
- .b8 108
- .b8 111
- .b8 110
- .b8 103
- .b8 32
- .b8 108
- .b8 111
- .b8 110
- .b8 103
-
- .b8 0
- .b8 5
- .b32 8
  .b8 0
 }
 .section .debug_abbrev {
@@ -8623,6 +8926,49 @@ func_end7:
 
  .b8 12
 
+ .b8 46
+
+ .b8 1
+
+ .b8 135
+ .b8 64
+
+ .b8 8
+
+ .b8 3
+
+ .b8 8
+
+ .b8 58
+
+ .b8 6
+
+ .b8 59
+
+ .b8 6
+
+ .b8 73
+
+ .b8 19
+
+ .b8 17
+
+ .b8 1
+
+ .b8 18
+
+ .b8 1
+
+ .b8 64
+
+ .b8 10
+
+ .b8 0
+
+ .b8 0
+
+ .b8 13
+
  .b8 11
 
  .b8 1
@@ -8639,7 +8985,7 @@ func_end7:
 
  .b8 0
 
- .b8 13
+ .b8 14
 
  .b8 52
 
@@ -8673,7 +9019,7 @@ func_end7:
 
  .b8 0
 
- .b8 14
+ .b8 15
 
  .b8 52
 
@@ -8703,7 +9049,7 @@ func_end7:
 
  .b8 0
 
- .b8 15
+ .b8 16
 
  .b8 59
 
@@ -8717,7 +9063,7 @@ func_end7:
 
  .b8 0
 
- .b8 16
+ .b8 17
 
  .b8 52
 
@@ -8747,7 +9093,7 @@ func_end7:
 
  .b8 0
 
- .b8 17
+ .b8 18
 
  .b8 19
 
@@ -8773,7 +9119,7 @@ func_end7:
 
  .b8 0
 
- .b8 18
+ .b8 19
 
  .b8 15
 
@@ -8791,7 +9137,7 @@ func_end7:
 
  .b8 0
 
- .b8 19
+ .b8 20
 
  .b8 38
 
@@ -8809,8 +9155,8 @@ func_end7:
 
 }
 .section .debug_loc {
- .b32 tmp14
  .b32 tmp17
+ .b32 tmp20
  .b8 6
  .b8 0
  .b8 144
@@ -8819,79 +9165,79 @@ func_end7:
  .b8 201
  .b8 171
  .b8 2
- .b32 tmp17
- .b32 tmp18
+ .b32 tmp20
+ .b32 tmp21
  .b8 6
  .b8 0
  .b8 144
- .b8 185
+ .b8 184
  .b8 200
  .b8 201
  .b8 171
  .b8 2
- .b32 tmp18
- .b32 tmp19
+ .b32 tmp21
+ .b32 tmp22
  .b8 7
  .b8 0
  .b8 144
- .b8 178
+ .b8 177
  .b8 226
  .b8 144
  .b8 147
  .b8 215
  .b8 4
+ .b32 tmp22
+ .b32 func_end7
+ .b8 7
+ .b8 0
+ .b8 144
+ .b8 180
+ .b8 226
+ .b8 144
+ .b8 147
+ .b8 215
+ .b8 4
+ .b32 0
+ .b32 0
  .b32 tmp19
- .b32 func_end6
+ .b32 tmp25
  .b8 7
  .b8 0
  .b8 144
  .b8 181
- .b8 226
- .b8 144
- .b8 147
- .b8 215
- .b8 4
- .b32 0
- .b32 0
- .b32 tmp16
- .b32 tmp22
- .b8 7
- .b8 0
- .b8 144
- .b8 182
  .b8 228
  .b8 144
  .b8 147
  .b8 215
  .b8 4
- .b32 tmp22
- .b32 tmp30
+ .b32 tmp25
+ .b32 tmp33
  .b8 7
  .b8 0
  .b8 144
- .b8 182
+ .b8 181
  .b8 228
  .b8 144
  .b8 147
  .b8 215
  .b8 4
- .b32 tmp30
- .b32 tmp31
+ .b32 tmp33
+ .b32 tmp34
  .b8 7
  .b8 0
  .b8 144
- .b8 182
+ .b8 181
  .b8 228
  .b8 144
  .b8 147
  .b8 215
  .b8 4
- .b32 tmp31
- .b32 func_end6
+ .b32 tmp34
+ .b32 func_end7
  .b8 7
  .b8 0
  .b8 144
- .b8 182
+ .b8 181
  .b8 228
  .b8 144
  .b8 147
@@ -8899,60 +9245,60 @@ func_end7:
  .b8 4
  .b32 0
  .b32 0
- .b32 tmp20
- .b32 tmp24
- .b8 6
- .b8 0
- .b8 144
- .b8 184
- .b8 230
- .b8 200
- .b8 171
- .b8 2
- .b32 tmp24
- .b32 tmp34
- .b8 6
- .b8 0
- .b8 144
- .b8 184
- .b8 230
- .b8 200
- .b8 171
- .b8 2
- .b32 tmp34
- .b32 tmp34
- .b8 6
- .b8 0
- .b8 144
- .b8 184
- .b8 230
- .b8 200
- .b8 171
- .b8 2
- .b32 tmp34
- .b32 func_end6
- .b8 6
- .b8 0
- .b8 144
- .b8 184
- .b8 230
- .b8 200
- .b8 171
- .b8 2
- .b32 0
- .b32 0
- .b32 tmp21
  .b32 tmp23
+ .b32 tmp27
  .b8 6
  .b8 0
  .b8 144
- .b8 177
+ .b8 185
+ .b8 230
+ .b8 200
+ .b8 171
+ .b8 2
+ .b32 tmp27
+ .b32 tmp37
+ .b8 6
+ .b8 0
+ .b8 144
+ .b8 185
+ .b8 230
+ .b8 200
+ .b8 171
+ .b8 2
+ .b32 tmp37
+ .b32 tmp37
+ .b8 6
+ .b8 0
+ .b8 144
+ .b8 185
+ .b8 230
+ .b8 200
+ .b8 171
+ .b8 2
+ .b32 tmp37
+ .b32 func_end7
+ .b8 6
+ .b8 0
+ .b8 144
+ .b8 185
+ .b8 230
+ .b8 200
+ .b8 171
+ .b8 2
+ .b32 0
+ .b32 0
+ .b32 tmp24
+ .b32 tmp26
+ .b8 6
+ .b8 0
+ .b8 144
+ .b8 178
  .b8 232
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp23
- .b32 tmp29
+ .b32 tmp26
+ .b32 tmp32
  .b8 5
  .b8 0
  .b8 144
@@ -8960,8 +9306,8 @@ func_end7:
  .b8 228
  .b8 149
  .b8 1
- .b32 tmp29
  .b32 tmp32
+ .b32 tmp35
  .b8 6
  .b8 0
  .b8 144
@@ -8970,52 +9316,52 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp32
- .b32 func_end6
+ .b32 tmp35
+ .b32 func_end7
  .b8 6
  .b8 0
  .b8 144
- .b8 177
+ .b8 178
  .b8 232
  .b8 200
  .b8 171
  .b8 2
  .b32 0
  .b32 0
- .b32 tmp22
  .b32 tmp25
+ .b32 tmp28
  .b8 6
  .b8 0
  .b8 144
- .b8 179
+ .b8 180
  .b8 232
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp25
- .b32 tmp40
+ .b32 tmp28
+ .b32 tmp43
  .b8 6
  .b8 0
  .b8 144
- .b8 179
+ .b8 180
  .b8 232
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp40
- .b32 func_end6
+ .b32 tmp43
+ .b32 func_end7
  .b8 6
  .b8 0
  .b8 144
- .b8 179
+ .b8 180
  .b8 232
  .b8 200
  .b8 171
  .b8 2
  .b32 0
  .b32 0
- .b32 tmp45
- .b32 tmp50
+ .b32 tmp48
+ .b32 tmp53
  .b8 6
  .b8 0
  .b8 144
@@ -9024,8 +9370,8 @@ func_end7:
  .b8 201
  .b8 171
  .b8 2
- .b32 tmp50
- .b32 func_end7
+ .b32 tmp53
+ .b32 func_end8
  .b8 6
  .b8 0
  .b8 144
@@ -9036,8 +9382,8 @@ func_end7:
  .b8 2
  .b32 0
  .b32 0
- .b32 tmp46
- .b32 tmp48
+ .b32 tmp49
+ .b32 tmp51
  .b8 6
  .b8 0
  .b8 144
@@ -9046,8 +9392,8 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp48
- .b32 tmp52
+ .b32 tmp51
+ .b32 tmp55
  .b8 6
  .b8 0
  .b8 144
@@ -9056,8 +9402,8 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp52
- .b32 tmp52
+ .b32 tmp55
+ .b32 tmp55
  .b8 6
  .b8 0
  .b8 144
@@ -9066,8 +9412,8 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp52
- .b32 func_end7
+ .b32 tmp55
+ .b32 func_end8
  .b8 6
  .b8 0
  .b8 144
@@ -9078,8 +9424,8 @@ func_end7:
  .b8 2
  .b32 0
  .b32 0
- .b32 tmp48
- .b32 tmp48
+ .b32 tmp51
+ .b32 tmp51
  .b8 6
  .b8 0
  .b8 144
@@ -9088,8 +9434,8 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp48
- .b32 tmp53
+ .b32 tmp51
+ .b32 tmp56
  .b8 6
  .b8 0
  .b8 144
@@ -9098,8 +9444,8 @@ func_end7:
  .b8 200
  .b8 171
  .b8 2
- .b32 tmp53
- .b32 func_end7
+ .b32 tmp56
+ .b32 func_end8
  .b8 6
  .b8 0
  .b8 144
@@ -9114,11 +9460,11 @@ func_end7:
 .section .debug_ranges {
 }
 .section .debug_pubnames {
- .b32 250
+ .b32 333
  .b8 2
  .b8 0
  .b32 .debug_info
- .b32 7663
+ .b32 7963
  .b32 2830
  .b8 99
  .b8 117
@@ -9166,6 +9512,87 @@ func_end7:
  .b8 117
  .b8 116
  .b8 101
+ .b8 0
+
+ .b32 3722
+ .b8 95
+ .b8 90
+ .b8 78
+ .b8 54
+ .b8 51
+ .b8 95
+ .b8 73
+ .b8 78
+ .b8 84
+ .b8 69
+ .b8 82
+ .b8 78
+ .b8 65
+ .b8 76
+ .b8 95
+ .b8 52
+ .b8 49
+ .b8 95
+ .b8 116
+ .b8 109
+ .b8 112
+ .b8 120
+ .b8 102
+ .b8 116
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 50
+ .b8 102
+ .b8 101
+ .b8 56
+ .b8 95
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 48
+ .b8 95
+ .b8 56
+ .b8 95
+ .b8 107
+ .b8 101
+ .b8 114
+ .b8 110
+ .b8 101
+ .b8 108
+ .b8 95
+ .b8 99
+ .b8 112
+ .b8 112
+ .b8 49
+ .b8 95
+ .b8 105
+ .b8 105
+ .b8 95
+ .b8 52
+ .b8 100
+ .b8 100
+ .b8 56
+ .b8 49
+ .b8 53
+ .b8 102
+ .b8 50
+ .b8 53
+ .b8 95
+ .b8 95
+ .b8 108
+ .b8 100
+ .b8 103
+ .b8 69
+ .b8 80
+ .b8 75
+ .b8 120
  .b8 0
 
  .b32 3184
@@ -9229,7 +9656,7 @@ func_end7:
  .b8 99
  .b8 0
 
- .b32 3722
+ .b32 3999
  .b8 95
  .b8 90
  .b8 49
@@ -9250,7 +9677,7 @@ func_end7:
  .b8 105
  .b8 0
 
- .b32 4180
+ .b32 4485
  .b8 95
  .b8 90
  .b8 57

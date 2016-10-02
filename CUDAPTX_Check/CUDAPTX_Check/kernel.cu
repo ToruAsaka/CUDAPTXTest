@@ -15,7 +15,13 @@ __global__ void LoadCheck_Rem(int Ret) {
 	unsigned long long LoadReg;
 	unsigned long long RefReg = 0x000000000000FFFF;
 	long long * lpDev = (long long  *)DeviceMem;
-	LoadReg = lpDev[x];
+	LoadReg = __ldg(&lpDev[x]);
+	int Clock;
+	asm volatile (
+		"mov.u32 %0, %clock;\n\t"
+		:"=r"(Clock)
+		);
+
 	__shared__ short Cost[4];
 	Cost[0] = (short)((LoadReg & RefReg)	  );
 	RefReg <<= 16;
