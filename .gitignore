@@ -4,3 +4,12 @@
 *.ptx
 *.cubin
 *.fatbin
+/CUDAPTX_Check/CUDAPTX_Check/Debug/CUDAPTX_Check.tlog
+/CUDAPTX_Check/CUDAPTX_Check/Debug/kernel.cu.deps
+/CUDAPTX_Check/CUDAPTX_Check/Debug/kernel.cu.cache
+/CUDAPTX_Check/CUDAPTX_Check/Debug/CUDAPTX_Check.log
+/CUDAPTX_Check/.vs/CUDAPTX_Check/v14/.suo
+*.dll
+/CUDAPTX_Check/Debug
+/CUDAPTX_Check/CUDAPTX_Check/vc140.pdb
+*.opendb
